@@ -114,22 +114,8 @@ form button:focus {
     margin-bottom: 20px;
 }
 
-.note-feed strong {
-    position: absolute;
-    top: -20px;
-    left: 0;
-    font-size: 12px;
-    color: #333e47;
-}
-
-.note-feed strong a {
-    text-decoration: none;
-    outline: none;
-    color: #333e47;
-    cursor: pointer;
-}
-
-.note-feed h2 {
+.note-feed input {
+    border: none;
     font-size: 14px;
     margin-bottom: 10px;
     display: inline-block;
@@ -147,6 +133,8 @@ form button:focus {
     margin-bottom: 10px;
     color: #333e47;
     cursor: pointer;
+    text-overflow: ellipsis;
+    /* How does text-overflow work? */
 }
 
 .note-feed button {
@@ -162,7 +150,7 @@ form button:focus {
     outline: none;
 }
 
-/* modal */
+/* view-detail-modal */
 
 .detail-modal {
     display: none;
@@ -187,6 +175,7 @@ form button:focus {
 }
 
 .detail-modal-content {
+    word-wrap: break-word;
     margin-left: 38px;
     background-color: #fefefe;
     padding: 20px;
