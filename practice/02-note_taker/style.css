@@ -207,6 +207,7 @@ form button:focus {
 .delete-modal span {
     position: absolute;
     top: 0;
+    cursor: pointer;
 }
 
 .delete-modal button {
