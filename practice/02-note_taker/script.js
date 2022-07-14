@@ -1,10 +1,11 @@
 const displayScreen = document.querySelector(".display-screen")
 const addNoteButton = document.querySelector(".note-input button")
 const writeNoteHere = document.querySelector(".note-input textarea")
-const note = document.querySelector(".note-feed")
 let viewDetailModal = document.querySelector(".detail-modal")
 let viewDetailNote = document.querySelector(".detail-modal p")
 const viewDetailClose = document.querySelector(".detail-modal-content span")
+let deleteModal = document.querySelector(".delete-modal")
+const deleteClose = document.querySelector(".delete-modal-content span ")
 
 addNoteButton.addEventListener("click", function (event) {
   event.preventDefault()
@@ -42,6 +43,7 @@ addNoteButton.addEventListener("click", function (event) {
   viewDetailButton.addEventListener("click", function () {
     viewDetailModal.classList.add('active')
     viewDetailNote.innerHTML = p.innerHTML
+    event.stopPropagation(); /* disable parent(in this case delete-modal) click event when child(in this case button) is clicked */
   })
 
   //close detail-modal
