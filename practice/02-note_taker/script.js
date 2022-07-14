@@ -1,82 +1,33 @@
-let noteFeed;
-let noteNumber;
-let noteContent;
-let viewDetailButton;
+const addNoteButton = document.querySelector(".note-input button")
+const writeNoteHere = document.querySelector(".note-input textarea")
+const displayScreen = document.querySelector(".display-screen")
 
-// Refactored as objects 
-// how to reference [object name.property name]
-let querySelectors = {
-  noteInput: document.querySelector("textarea"),
-  addNoteButton: document.querySelector(".note-input button"),
-  modal: document.querySelector(".detail-modal"),
-  modalInput: document.querySelector(".detail-modal-content p"),
-  modalClose: document.querySelector(".detail-modal span"),
-  deletemodal: document.querySelector(".delete-modal"),
-  displayScreen: document.querySelector(".display-screen"),
-};
-let functions = {
-  CreateFeedElements () {
-    noteFeed = document.createElement("div");
-    noteNumber = document.createElement("input");
-    noteContent = document.createElement("p");
-    viewDetailButton = document.createElement("button");
-  },
-  CreateNote (event) {
-    noteNumber.value = "Note";
-    noteNumber.readOnly = true;
+addNoteButton.addEventListener("click", function (event) {
+  event.preventDefault()
+  //create note-feed
+  let div = document.createElement("div")
+  let input = document.createElement("input")
+  let p = document.createElement("p")
+  let viewDetailButton = document.createElement("button")
 
-    noteNumber.ondblclick = () => {
-      noteNumber.readOnly = false;
-      noteNumber.select();
-      noteNumber.onkeyup = (event) => {
-        // if keyPress == enter && noteNum != 0
-        if (event.keyCode === 13 && noteNumber.value != 0) {
-          noteNumber.blur();
-          noteNumber.readOnly = true;
-        } else if (event.keyCode === 13 && noteNumber.value == 0) {
-          noteNumber.value = "Note";
-          noteNumber.blur();
-          noteNumber.readOnly = true;
-        }
-      };
-    };
-    querySelectors.displayScreen.appendChild(noteFeed);
+  div.classList.add("note-feed")
+  input.value = "Note" /* value와 innerHTML/innerText의 차이점? */
+  input.setAttribute("disabled", "") /* setAttribute는 속성이름과 속성값을 반드시 함께 기재해야함. 자주하는 실수는 속성값만 기재하는 것! */
+  input.title = "double-click to edit note title" /* disabled 된 input도 title 작성 가능! 그렇다면 input이 disabled되었을 때 안되는 것은 무엇인가? */
+  let note = writeNoteHere.value
+  p.innerHTML = note
+  viewDetailButton.innerHTML = "View Detail" /* innerHTML 과 innerText의 차이점? */
 
-    noteFeed.classList.add("note-feed");
+  div.appendChild(input);
+  div.appendChild(p);
+  div.appendChild(viewDetailButton);
+  displayScreen.appendChild(div);
 
-    noteFeed.appendChild(noteNumber);
-    noteFeed.appendChild(noteContent);
+  //clear writeNoteHere text
+  writeNoteHere.value = "" /* note.value=""은 왜 안되지요? */
 
-    noteContent.innerText = querySelectors.noteInput.value;
-
-    noteFeed.appendChild(viewDetailButton);
-
-    viewDetailButton.innerHTML = "View Detail";
-
-    event.preventDefault();
-
-    querySelectors.noteInput.value = "";
-  },
-  DetailModal () {
-    querySelectors.modal.classList.add("active");
-    querySelectors.modalInput.innerHTML = noteContent.innerHTML;
-  },
-};
-
-// Code starts here
-querySelectors.addNoteButton.addEventListener("click", function (event) {
-  functions.CreateFeedElements();
-  let condition = querySelectors.noteInput.value.length >= 1;
-  if (condition) {
-    functions.CreateNote(event);
-    viewDetailButton.addEventListener("click", functions.DetailModal);
-  }
-});
-querySelectors.modalClose.addEventListener("click", () => {
-  querySelectors.modal.classList.remove("active");
-});
-
-/* create date class above note-feed */
-let date = new Date();
-
-/* add tooltip(double-click to edit) when you hover on the notename */
+  //edit notetitle
+  input.addEventListener("dblclick", function () {
+    /* 속성 disabled 된 input은 click, dblclick이벤트를 감지할 수 없음 */
+  })
+})
