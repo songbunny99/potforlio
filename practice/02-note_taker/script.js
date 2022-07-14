@@ -48,4 +48,17 @@ addNoteButton.addEventListener("click", function (event) {
   viewDetailClose.addEventListener("click", function () {
     viewDetailModal.classList.remove('active')
   })
+
+  //view delete-modal
+  let note = document.querySelectorAll(".note-feed")
+  for (let i = 0; i < note.length; i++) {
+    note[i].addEventListener("click", function () {
+      deleteModal.classList.add("active")
+    })
+  }
+
+  //close delete-modal
+  deleteClose.addEventListener("click", function () {
+    deleteModal.classList.remove("active")
+  })
 })
